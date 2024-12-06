@@ -19,6 +19,7 @@ def initialize_model(model_name, quantize_type, device, hf_token, flash_attn):
       "trust_remote_code": True,
       "token": hf_token,
       "use_flash_attention_2": True if flash_attn else False,
+      "device_map": "auto",
   }
 
   if quantize_type == "4bit":
@@ -43,7 +44,6 @@ def initialize_model(model_name, quantize_type, device, hf_token, flash_attn):
     model_kwargs.update({"torch_dtype": torch.float16})
 
   model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
-  # 量子化がない場合、モデルを適切なデバイスに移動
   if quantize_type == "none" or quantize_type == "half":
     model.to(device)
   model.eval()

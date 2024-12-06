@@ -28,5 +28,4 @@ time python $project/src/111224_add_summary_prompt_by_hf.py \
     --batch_size $batch_size \
     --max_new_tokens $max_new_tokens
 
-
 echo "Done"

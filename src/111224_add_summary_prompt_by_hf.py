@@ -71,7 +71,8 @@ if __name__ == "__main__":
   model_name = args.model
   quantize_type = args.quantize_type
   batch_size = args.batch_size
-  device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+  # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+  device = 'cuda'
   hf_token = os.getenv('HUGGINGFACE_TOKEN')
   kwargs = {
     "max_new_tokens": args.max_new_tokens,
@@ -84,11 +85,12 @@ if __name__ == "__main__":
   output_path = project_root / 'data' / 'wit' / 'en.wit.2k.prompt.summary.jsonl'
   wit_data = load_jsonl(wit_path)
   datalist = []
-  for i in range(0, len(wit_data), batch_size):
+  # for i in range(0, len(wit_data), batch_size):
+  for i in range(0, 10, 1):
     logger.info(f'{i+1}/{len(wit_data)}')
     batch = wit_data[i:i+batch_size]
     prompts = []
-    for line in batch[:10]:
+    for line in batch:
       caption_reference_description = line['caption_reference_description']
       abstracts = line['entity_abstract']
       entity_in_caption = line['entity_in_caption']
