@@ -12,11 +12,14 @@ from datasets import load_dataset
 import json
 from pathlib import Path
 
-project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path(
+    '/cl/home2/shintaro/text_simplification_for_image_generation')
+
 
 def load_wit_dataset():
-    dataset = load_dataset("google/wit", "en", trust_remote_code=True)
-    return dataset
+  dataset = load_dataset("google/wit", "en", trust_remote_code=True)
+  return dataset
+
 
 def save_to_jsonl(dataset, save_path):
   with open(save_path, "w") as f:
@@ -25,9 +28,10 @@ def save_to_jsonl(dataset, save_path):
 
 
 def download_from_hf_to_jsonl():
-    dataset = load_wit_dataset()
-    save_to_jsonl(dataset["train"], project_root / "data/wit/wit.raw.train.jsonl")
-    # WITはtrainしかない
+  dataset = load_wit_dataset()
+  save_to_jsonl(dataset["train"], project_root / "data/wit/wit.raw.train.jsonl")
+  # WITはtrainしかない
+
 
 if __name__ == "__main__":
-    download_from_hf_to_jsonl()
+  download_from_hf_to_jsonl()

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -p lang_mem_long
+#SBATCH -p lang_mem_week
 #SBATCH -c 2
 #SBATCH -t 100:00:00
 #SBATCH --account=lang

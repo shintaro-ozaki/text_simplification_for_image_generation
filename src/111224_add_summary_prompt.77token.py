@@ -41,8 +41,18 @@ def make_prompt_for_caption_reference_description_and_entity_summary(
 
 def make_prompt_for_summarization(caption_reference_description, entity,
                                   abstracts):
+  # caption_reference_descriptionのトークン数+entityのトークン数+abstractsのトークン数
+  current_tokens = len(
+      tokenizer(caption_reference_description,
+                return_tensors="pt").input_ids[0]) + sum([
+                    len(tokenizer(e, return_tensors="pt").input_ids[0]) +
+                    len(tokenizer(a, return_tensors="pt").input_ids[0])
+                    for e, a in zip(entity, abstracts)
+                ])
   prompt = f"""
-Please summarize the following text and make the optimal prompt for the image generation.
+The current tokens are {current_tokens} tokens.
+Please generate a summary so that there are 70 tokens.
+However, please do not delete proper nouns or other important information.
 Please begin the output with SummaryStart: and write the summary of the text.
 
 Caption: {caption_reference_description}
@@ -67,7 +77,6 @@ def summarize(model, tokenizer, prompts, kwargs):
   ).input_ids.to(device)  # CUDAを使用するためにデバイスを指定
   output = model.generate(input_ids, temperature=0.0, **kwargs)
   summaries = tokenizer.batch_decode(output, skip_special_tokens=True)
-  logger.info(f'Generated {len(summaries)} summaries')
   return summaries
 
 
@@ -75,13 +84,13 @@ if __name__ == "__main__":
   args = parse_args()
   model_name = args.model
   quantize_type = args.quantize_type
-  max_new_tokens = args.max_new_tokens
   batch_size = args.batch_size
+  max_new_tokens = args.max_new_tokens
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   logger.info(f'Device: {device}')
   hf_token = os.getenv('HUGGINGFACE_TOKEN')
   kwargs = {
-      "max_new_tokens": args.max_new_tokens,
+      "max_new_tokens": max_new_tokens,
       "do_sample": False,
   }
   model_suffix = model_name.split('/')[-1]
@@ -112,12 +121,12 @@ if __name__ == "__main__":
         # Summary: 以降を取得
         summary = summary.split('SummaryStart:')[2].strip()
         logger.info(f'Filtered: {summary=}')
-        prompt3 = make_prompt_for_caption_reference_description_and_entity_summary(
+        prompt4 = make_prompt_for_caption_reference_description_and_entity_summary(
             line['caption_reference_description'], summary)
-        line['summary3'] = summary
-        line['prompt3'] = prompt3
+        line['summary4'] = summary
+        line['prompt4'] = prompt4
         datalist.append(line)
     except Exception as e:
-      logger.error(e)
+      logger.error(f'Error: {e}')
   save_jsonl(datalist, output_path)
   logger.info(f'Saved to {output_path}')
