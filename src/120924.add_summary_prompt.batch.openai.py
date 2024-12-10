@@ -22,7 +22,6 @@ def save_jsonl(file, data):
       f.write(json.dumps(d, ensure_ascii=False) + '\n')
 
 
-# あなたは要約のプロであり、入力されたテキストを1つも情報を欠損することなく、70トークンに要約する必要があります。要約の開始はSummaryStart:で始まり、テキストの要約を記述してください。
 SYSTEM_PROMPT = "You are a expert in summarization and you need to summarize the input text into 70 tokens without missing any information. Please start the summary with SummaryStart: and describe the summary of the text."
 
 
@@ -53,7 +52,8 @@ def mak_batch_prompt_from_wit(data):
     entity_in_caption = line['entity_in_caption']
     if len(abstracts) == 0 or len(entity_in_caption) == 0:
       continue
-    user_prompt = make_prompt_for_summarization(caption_reference_description, entity_in_caption, abstracts)
+    user_prompt = make_prompt_for_summarization(caption_reference_description,
+                                                entity_in_caption, abstracts)
 
     data_dict = {
         "custom_id": f"request-{i}",

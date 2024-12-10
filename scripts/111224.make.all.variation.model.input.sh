@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -p lang_mem_week
 #SBATCH -c 2
-#SBATCH -t 100:00:00
+#SBATCH -t 200:00:00
 #SBATCH --account=lang
 #SBATCH --job-name=make-all-variation-model-input
 #SBATCH -o logs/slurm-%x-%j.log

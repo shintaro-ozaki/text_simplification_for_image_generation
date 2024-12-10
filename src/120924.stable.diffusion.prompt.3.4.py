@@ -10,8 +10,10 @@ import argparse
 from dotenv import load_dotenv
 
 load_dotenv()
-project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path(
+    '/cl/home2/shintaro/text_simplification_for_image_generation')
 seed = 42
+
 
 def parse_args():
   parser = argparse.ArgumentParser()
@@ -21,15 +23,19 @@ def parse_args():
   parser.add_argument('--debug', action='store_true')
   return parser.parse_args()
 
+
 def load_jsonl(file_path):
   with open(file_path, "r") as f:
     return [json.loads(line) for line in f]
 
+
 def initizalize_model(model_name):
-  pipeline = StableDiffusion3Pipeline.from_pretrained(model_name, torch_dtype=torch.bfloat16, token=os.getenv("WRITE_TOKEN"))
+  pipeline = StableDiffusion3Pipeline.from_pretrained(
+      model_name, torch_dtype=torch.bfloat16, token=os.getenv("WRITE_TOKEN"))
   pipeline = pipeline.to("cuda")
   pipeline.enable_model_cpu_offload()
   return pipeline
+
 
 def generate_image(prompt, pipeline):
   generator = torch.manual_seed(seed)
@@ -40,6 +46,7 @@ def generate_image(prompt, pipeline):
       generator=generator,
       max_sequence_length=512).images[0]
   return image
+
 
 if __name__ == "__main__":
   args = parse_args()

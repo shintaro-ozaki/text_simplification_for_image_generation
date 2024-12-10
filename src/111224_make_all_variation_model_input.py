@@ -15,7 +15,7 @@ def load_jsonl(file_path):
 def save_jsonl(data, file_path):
   with open(file_path, 'w') as f:
     for d in data:
-      f.write(json.dumps(d) + '\n')
+      f.write(json.dumps(d, ensure_ascii=False) + '\n')
 
 
 logging.basicConfig(
@@ -65,16 +65,14 @@ def get_abstract_of_entities(entities):
   abstracts = []
   entities = [entity for entity in entities if entity != ' ']
   for entity in entities:
-    # entity = entity.replace(' ', '_')
-    entitiy = quote(entity)
+    entity = entity.replace(' ', '_')
     pageid = get_pageid_from_title(entity)
-    if pageid is None:
+    if pageid == str(-1):
       continue
     sections, entities = get_full_page_content(pageid)
     wikitext = get_page_wikitext(pageid)
     wiki_text_entities = extract_hyperlinked_entities(wikitext)
     combined_entities = list(set(entities + wiki_text_entities))
-    # sectionsの中からabstractを取得
     abstract = sections.get('abstract', '')
     abstracts.append(abstract)
   return abstracts
@@ -91,9 +89,9 @@ def make_all_variation_model_input(wit_data, output_path):
     logger.info(f'{i+1}/{len(wit_data)}')
     try:
       caption_reference_description = line['caption_reference_description']
-      title = quote(line['page_title'])
+      title = line['page_title'].replace(' ', '_')
       pageid = get_pageid_from_title(title)
-      if pageid is None:
+      if pageid is None or pageid == str(-1):
         continue
       sections, entities = get_full_page_content(pageid)
       wikitext = get_page_wikitext(pageid)
@@ -119,12 +117,15 @@ def make_all_variation_model_input(wit_data, output_path):
           caption_reference_description, entity_in_caption, abstracts)
       line['prompt1'] = prompt1
       line['prompt2'] = prompt2
+      line.pop('context_page_description')
+      line.pop('context_section_description')
       datalist.append(line)
     except Exception as e:
       # raise e
       logger.info(e)
       continue
   save_jsonl(datalist, output_path)
+  print(f'Saved to {output_path}')
 
 
 if __name__ == "__main__":

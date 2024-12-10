@@ -11,7 +11,9 @@ from loguru import logger
 
 load_dotenv()
 seed = 42
-project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path(
+    '/cl/home2/shintaro/text_simplification_for_image_generation')
+
 
 def parse_args():
   parser = argparse.ArgumentParser()
@@ -21,31 +23,60 @@ def parse_args():
   parser.add_argument('--debug', action='store_true')
   return parser.parse_args()
 
+
 def load_jsonl(file_path):
   with open(file_path, "r") as f:
     return [json.loads(line) for line in f]
 
+
 def initizalize_model():
-  stage_1 = DiffusionPipeline.from_pretrained("DeepFloyd/IF-I-L-v1.0", variant="fp16", torch_dtype=torch.float16, token=os.getenv("WRITE_TOKEN"))
+  stage_1 = DiffusionPipeline.from_pretrained(
+      "DeepFloyd/IF-I-L-v1.0",
+      variant="fp16",
+      torch_dtype=torch.float16,
+      token=os.getenv("WRITE_TOKEN"))
   stage_1.enable_model_cpu_offload()
 
   stage_2 = DiffusionPipeline.from_pretrained(
-      "DeepFloyd/IF-II-L-v1.0", text_encoder=None, variant="fp16", torch_dtype=torch.float16, token=os.getenv("WRITE_TOKEN")
-  )
+      "DeepFloyd/IF-II-L-v1.0",
+      text_encoder=None,
+      variant="fp16",
+      torch_dtype=torch.float16,
+      token=os.getenv("WRITE_TOKEN"))
   stage_2.enable_model_cpu_offload()
 
-  safety_modules = {"feature_extractor": stage_1.feature_extractor, "safety_checker": stage_1.safety_checker, "watermarker": stage_1.watermarker}
-  stage_3 = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-x4-upscaler", **safety_modules, torch_dtype=torch.float16, token=os.getenv("WRITE_TOKEN"))
+  safety_modules = {
+      "feature_extractor": stage_1.feature_extractor,
+      "safety_checker": stage_1.safety_checker,
+      "watermarker": stage_1.watermarker
+  }
+  stage_3 = DiffusionPipeline.from_pretrained(
+      "stabilityai/stable-diffusion-x4-upscaler",
+      **safety_modules,
+      torch_dtype=torch.float16,
+      token=os.getenv("WRITE_TOKEN"))
   stage_3.enable_model_cpu_offload()
   return stage_1, stage_2, stage_3
+
 
 def generate_image(prompt, stage_1, stage_2, stage_3):
   prompt_embeds, negative_embeds = stage_1.encode_prompt(prompt)
   generator = torch.manual_seed(seed)
-  image = stage_1(prompt_embeds=prompt_embeds, negative_prompt_embeds=negative_embeds, generator=generator, output_type="pt").images
-  image = stage_2(image=image, prompt_embeds=prompt_embeds, negative_prompt_embeds=negative_embeds, generator=generator, output_type="pt").images
-  image = stage_3(prompt=prompt, image=image, generator=generator, noise_level=100).images
+  image = stage_1(
+      prompt_embeds=prompt_embeds,
+      negative_prompt_embeds=negative_embeds,
+      generator=generator,
+      output_type="pt").images
+  image = stage_2(
+      image=image,
+      prompt_embeds=prompt_embeds,
+      negative_prompt_embeds=negative_embeds,
+      generator=generator,
+      output_type="pt").images
+  image = stage_3(
+      prompt=prompt, image=image, generator=generator, noise_level=100).images
   return image[0]
+
 
 if __name__ == "__main__":
   args = parse_args()

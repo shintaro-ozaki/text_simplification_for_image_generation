@@ -202,15 +202,16 @@ def get_page_wikitext(page_id):
       "pageids": page_id,
       "format": "json"
   }
-  try:
-    response = session.get(WIKIPEDIA_API_URL, params=params)
-    data = response.json()
-    page = data["query"]["pages"][str(page_id)]
-    wikitext = page["revisions"][0]["slots"]["main"]["*"]
-    return wikitext
-  except (ConnectionError, Timeout, TooManyRedirects) as e:
-    print(f"Error retrieving wikitext for page ID {page_id}: {e}")
-    return ""
+  # try:
+  response = session.get(WIKIPEDIA_API_URL, params=params)
+  data = response.json()
+  page = data["query"]["pages"][str(page_id)]
+  # print(page)
+  wikitext = page["revisions"][0]["slots"]["main"]["*"]
+  return wikitext
+  # except (ConnectionError, Timeout, TooManyRedirects) as e:
+  #   print(f"Error retrieving wikitext for page ID {page_id}: {e}")
+  #   return ""
 
 
 def extract_links_with_anchor_text(page_id):
