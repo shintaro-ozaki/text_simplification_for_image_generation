@@ -2,21 +2,21 @@
 #SBATCH -p gpu_long
 #SBATCH -c 2
 #SBATCH -t 100:00:00
-#SBATCH --gres=gpu:v100:1
+#SBATCH --gres=gpu:a6000:1
 #SBATCH --account=is-nlp
-#SBATCH --job-name=make-prompt-phi-77token-iterative
+#SBATCH --job-name=make-prompt-llama8b-77token-iterative
 #SBATCH -o logs/slurm-%x-%j.log
 
 project=$(pwd)
 source $project/.venv/bin/activate
 
-model=microsoft/Phi-3.5-mini-instruct
+model=meta-llama/Llama-3.1-8B-Instruct
 quantize_type=none
 batch_size=1
 max_new_tokens=200
 iterative=3
 
-echo "Model: $model, Quantize: $quantize_type, Batch size: $batch_size, Max new tokens: $max_new_tokens, Iterative: $iterative"
+echo "Model: $model, Quantize: $quantize_type, Batch size: $batch_size, Max new tokens: $max_new_tokens"
 time python $project/src/111224_add_summary_prompt.77token.iterative.py \
     --model $model \
     --quantize_type $quantize_type \

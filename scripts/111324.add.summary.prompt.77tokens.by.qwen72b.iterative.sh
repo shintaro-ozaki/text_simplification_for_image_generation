@@ -2,7 +2,7 @@
 #SBATCH -p gpu_long
 #SBATCH -c 2
 #SBATCH -t 100:00:00
-#SBATCH --gres=gpu:v100:1
+#SBATCH --gres=gpu:6000:1
 #SBATCH --account=is-nlp
 #SBATCH --job-name=make-prompt-phi-77token-iterative
 #SBATCH -o logs/slurm-%x-%j.log
@@ -10,8 +10,8 @@
 project=$(pwd)
 source $project/.venv/bin/activate
 
-model=microsoft/Phi-3.5-mini-instruct
-quantize_type=none
+model=Qwen/Qwen2.5-72B-Instruct
+quantize_type=4bit
 batch_size=1
 max_new_tokens=200
 iterative=3

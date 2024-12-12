@@ -5,7 +5,7 @@ import os
 load_dotenv()
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
-batch_file = "/cl/home2/shintaro/text_simplification_for_image_generation/data/wit/batch.format.wit2k.jsonl"
+batch_file = "/cl/home2/shintaro/text_simplification_for_image_generation/data/wit/en.wit.2k.batch.input.jsonl"
 
 batch_input_file = client.files.create(
   file=open(batch_file, 'rb'),

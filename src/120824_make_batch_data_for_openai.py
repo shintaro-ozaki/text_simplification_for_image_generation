@@ -36,6 +36,7 @@ def make_prompt_for_summarization(caption_reference_description, entity,
   prompt = f"""
 Please summarize the following text and make the optimal prompt for the image generation.
 Please make the prompt as simple as possible, not hitting the 100 tokens limit.
+Begin the output with SummaryStart: and write the summary of the text.
 
 Caption: {caption_reference_description}
 
@@ -43,18 +44,21 @@ Complement:
 """
   for e, a in zip(entity, abstracts):
     prompt += f"* {e}: {a}\n"
+  prompt += """
+SummaryStart:
+"""
   return prompt
 
 
 if __name__ == "__main__":
   model_name = 'gpt-4o-mini'
-
-  wit_path = project_root / 'data' / 'wit' / 'en.wit.2k.debug.prompt.jsonl'
+  wit_path = project_root / 'data' / 'wit' / 'en.wit.2k.prompt.jsonl'
   output_path = project_root / 'data' / 'wit' / 'en.wit.2k.batch.input.jsonl'
   wit_data = load_jsonl(wit_path)
   openai_datalist = []
 
   for i, line in enumerate(wit_data):
+    print(f'Processing {i} / {len(wit_data)}')
     caption_reference_description = line['caption_reference_description']
     abstracts = line['entity_abstract']
     entity_in_caption = line['entity_in_caption']
