@@ -20,6 +20,6 @@ microsoft/Phi-3.5-mini-instruct
 _COMMENT_OUT
 
 time python $project/src/120924.stable.diffusion.prompt.3.openai.py \
-    --prompt 3 \
+  --prompt 3
 
 echo "Done"

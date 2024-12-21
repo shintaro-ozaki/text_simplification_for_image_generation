@@ -11,6 +11,6 @@ project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.dreamlike.prompt.3.openai.py \
-    --prompt 3
+  --prompt 3
 
 echo "Done"

@@ -5,6 +5,7 @@ def initialize_clip_tokenizer(tokenizer_name):
   tokenizer = CLIPTokenizer.from_pretrained(tokenizer_name)
   return tokenizer
 
+
 def tokenize_by_clip_tokenizer(tokenizer, text):
   tokens = tokenizer(
       text,
@@ -14,11 +15,14 @@ def tokenize_by_clip_tokenizer(tokenizer, text):
   )
   return tokens
 
+
 def clip_tokenized_words(tokenizer, text):
   tokens = tokenize_by_clip_tokenizer(tokenizer, text)
-  decoded_text = tokenizer.decode(tokens["input_ids"][0], skip_special_tokens=True)
+  decoded_text = tokenizer.decode(
+      tokens["input_ids"][0], skip_special_tokens=True)
   count_words = len(decoded_text.split())
   return count_words
+
 
 if __name__ == "__main__":
   text = "This is an example sentence for tokenization."

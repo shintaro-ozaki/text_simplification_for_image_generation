@@ -10,16 +10,16 @@
 project=$(pwd)
 source $project/.venv/bin/activate
 
-model=meta-llama/Llama-3.1-70B-Instruct
+model=meta-llama/Llama-3.3-70B-Instruct
 quantize_type=4bit
 batch_size=1
-max_new_tokens=200
+max_new_tokens=512
 
 echo "Model: $model, Quantize: $quantize_type, Batch size: $batch_size, Max new tokens: $max_new_tokens"
 time python $project/src/111224_add_summary_prompt_by_hf.py \
-    --model $model \
-    --quantize_type $quantize_type \
-    --batch_size $batch_size \
-    --max_new_tokens $max_new_tokens
+  --model $model \
+  --quantize_type $quantize_type \
+  --batch_size $batch_size \
+  --max_new_tokens $max_new_tokens
 
 echo "Done"

@@ -19,9 +19,9 @@ microsoft/Phi-3.5-mini-instruct
 _COMMENT_OUT
 
 time python $project/src/120924.stable.diffusion.prompt.5.py \
-    --prompt 5 \
-    --summarize_model meta-llama/Llama-3.1-8B-Instruct \
-    --max_token 200 \
-    --iterative 3
+  --prompt 5 \
+  --summarize_model meta-llama/Llama-3.1-8B-Instruct \
+  --max_token 200 \
+  --iterative 3
 
 echo "Done"

@@ -11,8 +11,8 @@ project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.dreamlike.prompt.3.4.py \
-    --prompt 3 \
-    --summarize_model Qwen/Qwen2.5-72B-Instruct \
-    --max_token 512
+  --prompt 3 \
+  --summarize_model Qwen/Qwen2.5-72B-Instruct \
+  --max_token 512
 
 echo "Done"

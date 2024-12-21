@@ -8,7 +8,6 @@
 
 set -eu
 
-
 project=$(pwd)
 source $project/.venv/bin/activate
 

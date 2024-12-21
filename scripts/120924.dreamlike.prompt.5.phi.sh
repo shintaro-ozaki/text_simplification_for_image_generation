@@ -7,14 +7,13 @@
 #SBATCH --job-name=dreamlike-prompt5
 #SBATCH -o logs/slurm-%x-%j.log
 
-
 project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.dreamlike.prompt.5.py \
-    --prompt 5 \
-    --summarize_model microsoft/Phi-3.5-mini-instruct \
-    --max_token 200 \
-    --iterative 3
+  --prompt 5 \
+  --summarize_model microsoft/Phi-3.5-mini-instruct \
+  --max_token 200 \
+  --iterative 3
 
 echo "Done"

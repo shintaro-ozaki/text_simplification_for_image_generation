@@ -52,9 +52,9 @@ if __name__ == "__main__":
   max_token = 512
   wit_input_file = project_root / "data" / "wit" / f"en.wit.2k.prompt.summary.openai.{max_token}.jsonl"
   model_name = "dreamlike-art/dreamlike-photoreal-2.0"
-  model_name_suffix = 'openai'
+  model_name_suffix = model_name.split('/')[-1]
   if prompt_pattern == 3:
-    image_dir = project_root / "generated_images" / "pattern3" / 'openai' /  f"{summarize_model_suffix}.{max_token}"
+    image_dir = project_root / "generated_images" / "pattern3" / model_name_suffix / f"{summarize_model_suffix}.{max_token}"
   image_dir.mkdir(exist_ok=True, parents=True)
   pipeline = initizalize_model(model_name)
   logger.info(f'image_dir: {image_dir}')
@@ -63,7 +63,8 @@ if __name__ == "__main__":
   for i, line in enumerate(wit_data):
     logger.info(f'Iteration {i} / {len(wit_data)}')
     if prompt_pattern == 3:
-      content = line["response"]["body"]["choices"][0]["message"]["content"].split('\n\n')[0]
+      content = line["response"]["body"]["choices"][0]["message"][
+          "content"].split('\n\n')[0]
       prompt = content.replace('SummaryStart:', '')
     else:
       raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")

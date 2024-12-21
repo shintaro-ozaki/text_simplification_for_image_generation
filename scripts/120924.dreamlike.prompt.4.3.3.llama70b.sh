@@ -7,13 +7,12 @@
 #SBATCH --job-name=dreamlike-prompt4
 #SBATCH -o logs/slurm-%x-%j.log
 
-
 project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.dreamlike.prompt.3.4.py \
-    --prompt 4 \
-    --summarize_model meta-llama/Llama-3.3-70B-Instruct \
-    --max_token 200
+  --prompt 4 \
+  --summarize_model meta-llama/Llama-3.3-70B-Instruct \
+  --max_token 200
 
 echo "Done"

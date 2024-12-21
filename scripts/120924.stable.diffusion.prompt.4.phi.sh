@@ -19,8 +19,8 @@ microsoft/Phi-3.5-mini-instruct
 _COMMENT_OUT
 
 time python $project/src/120924.stable.diffusion.prompt.3.4.py \
-    --prompt 4 \
-    --summarize_model microsoft/Phi-3.5-mini-instruct \
-    --max_token 200
+  --prompt 4 \
+  --summarize_model microsoft/Phi-3.5-mini-instruct \
+  --max_token 200
 
 echo "Done"

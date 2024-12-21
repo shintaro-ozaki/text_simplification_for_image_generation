@@ -11,9 +11,9 @@ project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.deep.floyd.prompt.5.py \
-    --prompt 5 \
-    --summarize_model meta-llama/Llama-3.1-70B-Instruct \
-    --max_token 200 \
-    --iterative 3
+  --prompt 5 \
+  --summarize_model meta-llama/Llama-3.1-70B-Instruct \
+  --max_token 200 \
+  --iterative 3
 
 echo "Done"

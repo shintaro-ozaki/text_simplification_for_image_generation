@@ -42,7 +42,8 @@ def make_prompt_for_caption_reference_description_and_entity_summary(
 
 def make_prompt_for_summarization(caption_reference_description, entity,
                                   abstracts, clip_tokenizer):
-  current_words = clip_tokenized_words(clip_tokenizer, caption_reference_description)
+  current_words = clip_tokenized_words(clip_tokenizer,
+                                       caption_reference_description)
   for e, a in zip(entity, abstracts):
     current_words += clip_tokenized_words(clip_tokenizer, e)
     current_words += clip_tokenized_words(clip_tokenizer, a)
@@ -112,7 +113,8 @@ if __name__ == "__main__":
         abstracts = line['entity_abstract']
         entity_in_caption = line['entity_in_caption']
         prompt_for_summary = make_prompt_for_summarization(
-            caption_reference_description, entity_in_caption, abstracts, clip_tokenizer)
+            caption_reference_description, entity_in_caption, abstracts,
+            clip_tokenizer)
         prompts.append(prompt_for_summary)
       summaries = summarize(model, tokenizer, prompts, kwargs)
       for line, summary in zip(batch, summaries):

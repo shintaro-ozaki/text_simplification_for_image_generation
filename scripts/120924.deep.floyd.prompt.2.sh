@@ -11,6 +11,6 @@ project=$(pwd)
 source $project/.venv/bin/activate
 
 time python $project/src/120924.deep.floyd.prompt.1.2.py \
-    --prompt 2
+  --prompt 2
 
 echo "Done"

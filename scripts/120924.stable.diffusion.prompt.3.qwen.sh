@@ -20,9 +20,8 @@ microsoft/Phi-3.5-mini-instruct
 _COMMENT_OUT
 
 time python $project/src/120924.stable.diffusion.prompt.3.4.py \
-    --prompt 3 \
-    --summarize_model Qwen/Qwen2.5-72B-Instruct \
-    --max_token 512
-
+  --prompt 3 \
+  --summarize_model Qwen/Qwen2.5-72B-Instruct \
+  --max_token 512
 
 echo "Done"
