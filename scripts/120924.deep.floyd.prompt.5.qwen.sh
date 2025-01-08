@@ -4,7 +4,7 @@
 #SBATCH -t 100:00:00
 #SBATCH --gres=gpu:v100:1
 #SBATCH --account=is-nlp
-#SBATCH --job-name=deep-floyd-prompt5
+#SBATCH --job-name=deep-floyd-prompt5-v100
 #SBATCH -o logs/slurm-%x-%j.log
 
 project=$(pwd)
@@ -13,7 +13,7 @@ source $project/.venv/bin/activate
 time python $project/src/120924.deep.floyd.prompt.5.py \
   --prompt 5 \
   --summarize_model Qwen/Qwen2.5-72B-Instruct \
-  --max_token 200 \
+  --max_token 180 \
   --iterative 3
 
 echo "Done"

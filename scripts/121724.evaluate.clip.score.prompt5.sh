@@ -11,62 +11,83 @@ source $project/.venv/bin/activate
 
 echo "pattern5"
 
-echo "dreamlike-photoreal-2.0, LLama-3.1-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.1-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "dreamlike-photoreal-2.0, LLama-3.1-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.1-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "dreamlike-photoreal-2.0, LLama-3.1-8B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.1-8B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "dreamlike-photoreal-2.0, LLama-3.1-8B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.1-8B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "dreamlike-photoreal-2.0, LLama-3.3-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.3-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "dreamlike-photoreal-2.0, LLama-3.3-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Llama-3.3-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "dreamlike-photoreal-2.0, Phi-3.5-mini-instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Phi-3.5-mini-instruct.200.iterative3 --real_flag img --fake_flag img
+echo "dreamlike-photoreal-2.0, Phi-3.5-mini-instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Phi-3.5-mini-instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "dreamlike-photoreal-2.0, Qwen2.5-72B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Qwen2.5-72B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "dreamlike-photoreal-2.0, Qwen2.5-72B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/dreamlike-photoreal-2.0/Qwen2.5-72B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "IF-I-L-v1.0, LLama-3.1-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.1-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "IF-I-L-v1.0, LLama-3.1-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.1-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "IF-I-L-v1.0, LLama-3.1-8B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.1-8B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "IF-I-L-v1.0, LLama-3.1-8B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.1-8B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "IF-I-L-v1.0, LLama-3.3-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.3-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "IF-I-L-v1.0, LLama-3.3-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Llama-3.3-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "IF-I-L-v1.0, Phi-3.5-mini-instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Phi-3.5-mini-instruct.200.iterative3 --real_flag img --fake_flag img
+echo "IF-I-L-v1.0, Phi-3.5-mini-instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Phi-3.5-mini-instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "IF-I-L-v1.0, Qwen2.5-72B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Qwen2.5-72B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "IF-I-L-v1.0, Qwen2.5-72B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/IF-I-L-v1.0/Qwen2.5-72B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "stable-diffusion-3.5-large, LLama-3.1-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.1-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "stable-diffusion-3.5-large, LLama-3.1-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.1-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "stable-diffusion-3.5-large, LLama-3.1-8B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.1-8B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "stable-diffusion-3.5-large, LLama-3.1-8B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.1-8B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "stable-diffusion-3.5-large, LLama-3.3-70B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.3-70B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "stable-diffusion-3.5-large, LLama-3.3-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Llama-3.3-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "stable-diffusion-3.5-large, Phi-3.5-mini-instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Phi-3.5-mini-instruct.200.iterative3 --real_flag img --fake_flag img
+echo "stable-diffusion-3.5-large, Phi-3.5-mini-instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Phi-3.5-mini-instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-echo "stable-diffusion-3.5-large, Qwen2.5-72B-Instruct.200.iterative3, pattern5"
-python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Qwen2.5-72B-Instruct.200.iterative3 --real_flag img --fake_flag img
+echo "stable-diffusion-3.5-large, Qwen2.5-72B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Qwen2.5-72B-Instruct.180.iterative3 --real_flag img --fake_flag img
+echo "##############"
+
+
+echo "FLUX.1-dev, LLama-3.1-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Llama-3.1-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, LLama-3.1-8B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Llama-3.1-8B-Instruct.180.iterative3 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, LLama-3.3-70B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Llama-3.3-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, Phi-3.5-mini-instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Phi-3.5-mini-instruct.180.iterative3 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, Qwen2.5-72B-Instruct.180.iterative3, pattern5"
+python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Qwen2.5-72B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"

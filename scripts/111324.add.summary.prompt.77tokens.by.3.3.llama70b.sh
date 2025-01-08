@@ -13,7 +13,7 @@ source $project/.venv/bin/activate
 model=meta-llama/Llama-3.3-70B-Instruct
 quantize_type=4bit
 batch_size=1
-max_new_tokens=200
+max_new_tokens=180
 
 echo "Model: $model, Quantize: $quantize_type, Batch size: $batch_size, Max new tokens: $max_new_tokens"
 time python $project/src/111224_add_summary_prompt.77token.py \

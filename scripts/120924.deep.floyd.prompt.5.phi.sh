@@ -13,7 +13,7 @@ source $project/.venv/bin/activate
 time python $project/src/120924.deep.floyd.prompt.5.py \
   --prompt 5 \
   --summarize_model microsoft/Phi-3.5-mini-instruct \
-  --max_token 200 \
+  --max_token 180 \
   --iterative 3
 
 echo "Done"

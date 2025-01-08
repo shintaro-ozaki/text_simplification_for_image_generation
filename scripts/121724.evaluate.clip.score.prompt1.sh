@@ -23,3 +23,7 @@ echo "##############"
 echo "dreamlike-photoreal-2.0, pattern1"
 python -m clip_score wit_images_2k/ generated_images/pattern1/dreamlike-photoreal-2.0 --real_flag img --fake_flag img
 echo "##############"
+
+echo "flux-1.0.dev, pattern1"
+python -m clip_score wit_images_2k/ generated_images/pattern1/FLUX.1-dev --real_flag img --fake_flag img
+echo "##############"

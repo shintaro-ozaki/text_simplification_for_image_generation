@@ -191,4 +191,62 @@ python $project/src/121924.evaluate.lpips.py \
   -d1 $generated_dir \
   -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
+################################################
+
+model_name=FLUX.1-dev
+summarize_model_name=Llama-3.1-8B-Instruct.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+summarize_model_name=Llama-3.3-70B-Instruct.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+summarize_model_name=Llama-3.1-70B-Instruct.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+summarize_model_name=openai.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+summarize_model_name=Qwen2.5-72B-Instruct.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+summarize_model_name=Phi-3.5-mini-instruct.512
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+
+
 echo "Done!"

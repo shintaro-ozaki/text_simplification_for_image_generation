@@ -40,4 +40,14 @@ python $project/src/121924.evaluate.lpips.py \
   -d1 $generated_dir \
   -o $project/evaluated-lpips/$pattern/$model_name/lpips.json
 
+model_name=FLUX.1-dev
+reference_dir=$project/wit_images_2k/
+generated_dir=$project/generated_images/$pattern/$model_name/
+
+python $project/src/121924.evaluate.lpips.py \
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/lpips.json
+
+
 echo "Done!"

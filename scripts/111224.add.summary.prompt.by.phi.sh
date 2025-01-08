@@ -4,7 +4,7 @@
 #SBATCH -t 100:00:00
 #SBATCH --gres=gpu:v100:1
 #SBATCH --account=is-nlp
-#SBATCH --job-name=make-prompt-phi
+#SBATCH --job-name=make-prompt-phi-1644
 #SBATCH -o logs/slurm-%x-%j.log
 
 project=$(pwd)
@@ -13,7 +13,7 @@ source $project/.venv/bin/activate
 model=microsoft/Phi-3.5-mini-instruct
 quantize_type=none
 batch_size=1
-max_new_tokens=200
+max_new_tokens=512
 
 echo "Model: $model, Quantize: $quantize_type, Batch size: $batch_size, Max new tokens: $max_new_tokens"
 time python $project/src/111224_add_summary_prompt_by_hf.py \

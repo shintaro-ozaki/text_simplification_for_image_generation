@@ -13,6 +13,6 @@ source $project/.venv/bin/activate
 time python $project/src/120924.dreamlike.prompt.3.4.py \
   --prompt 4 \
   --summarize_model meta-llama/Llama-3.3-70B-Instruct \
-  --max_token 200
+  --max_token 180
 
 echo "Done"

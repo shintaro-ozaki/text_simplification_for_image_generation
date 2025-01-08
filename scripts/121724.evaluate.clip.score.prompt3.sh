@@ -82,3 +82,28 @@ echo "##############"
 echo "stable-diffusion-3.5-large, Qwen2.5-72B-Instruct.512, pattern3"
 python -m clip_score wit_images_2k/ generated_images/pattern3/stable-diffusion-3.5-large/Qwen2.5-72B-Instruct.512 --real_flag img --fake_flag img
 echo "##############"
+
+
+echo "FLUX.1-dev, LLama-3.1-70B-Instruct.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/Llama-3.1-70B-Instruct.512 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, LLama-3.1-8B-Instruct.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/Llama-3.1-8B-Instruct.512 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, LLama-3.3-70B-Instruct.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/Llama-3.3-70B-Instruct.512 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, openai.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/openai.512 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, Phi-3.5-mini-instruct.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/Phi-3.5-mini-instruct.512 --real_flag img --fake_flag img
+echo "##############"
+
+echo "FLUX.1-dev, Qwen2.5-72B-Instruct.512, pattern3"
+python -m clip_score wit_images_2k/ generated_images/pattern3/FLUX.1-dev/Qwen2.5-72B-Instruct.512 --real_flag img --fake_flag img
+echo "##############"

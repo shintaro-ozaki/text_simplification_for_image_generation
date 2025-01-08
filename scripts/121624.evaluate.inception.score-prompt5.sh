@@ -30,6 +30,7 @@ diffusion_models=(
   stabilityai/stable-diffusion-3.5-large
   DeepFloyd/IF-I-L-v1.0
   dreamlike-art/dreamlike-photoreal-2.0
+  black-forest-labs/FLUX.1-dev
 )
 
 summarize_model=(

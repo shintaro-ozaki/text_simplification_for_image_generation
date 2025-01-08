@@ -20,8 +20,8 @@ _COMMENT_OUT
 
 time python $project/src/120924.stable.diffusion.prompt.5.py \
   --prompt 5 \
-  --summarize_model Qwen/Qwen2.5-72B \
-  --max_token 200 \
+  --summarize_model microsoft/Phi-3.5-mini-instruct \
+  --max_token 180 \
   --iterative 3
 
 echo "Done"
