@@ -248,5 +248,4 @@ python $project/src/121924.evaluate.lpips.py \
   -d1 $generated_dir \
   -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
-
 echo "Done!"

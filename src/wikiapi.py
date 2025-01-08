@@ -104,13 +104,10 @@ def process_sections(content):
       if line.startswith("===="):
         current_subsubsection = line.strip("=").strip()
         _ensure_dict_structure(sections, current_section, current_subsection)
-        if current_subsubsection not in sections[current_section][
-            current_subsection]:
-          sections[current_section][current_subsection][
-              current_subsubsection] = ""
+        if current_subsubsection not in sections[current_section][current_subsection]:
+          sections[current_section][current_subsection][current_subsubsection] = ""
         line = re.sub(r'===.*?===', '', line).replace('\n', '')
-        sections[current_section][current_subsection][
-            current_subsubsection] += line + '\n'
+        sections[current_section][current_subsection][current_subsubsection] += line + '\n'
 
       elif line.startswith("==="):
         current_subsubsection = None
@@ -133,11 +130,9 @@ def process_sections(content):
 
       else:
         if isinstance(sections[current_section], dict):
-          if current_subsection and isinstance(
-              sections[current_section][current_subsection], dict):
+          if current_subsection and isinstance(sections[current_section][current_subsection], dict):
             if current_subsubsection:
-              sections[current_section][current_subsection][
-                  current_subsubsection] += line + '\n'
+              sections[current_section][current_subsection][current_subsubsection] += line + '\n'
             else:
               if '' not in sections[current_section][current_subsection]:
                 sections[current_section][current_subsection][''] = ""
@@ -161,12 +156,7 @@ def get_redirects_for_links(links):
   for i in range(0, len(links), 20):
     chunk = links[i:i + 20]
     titles = "|".join([link['title'] for link in chunk])
-    params = {
-        "action": "query",
-        "format": "json",
-        "titles": titles,
-        "redirects": 1
-    }
+    params = {"action": "query", "format": "json", "titles": titles, "redirects": 1}
 
     try:
       response = session.get(WIKIPEDIA_API_URL, params=params)
@@ -178,8 +168,7 @@ def get_redirects_for_links(links):
         data = response.json()
         if 'query' in data:
           chunk_redirects = {
-              redir['from']: redir['to']
-              for redir in data['query'].get('redirects', [])
+              redir['from']: redir['to'] for redir in data['query'].get('redirects', [])
           }
           redirects.update(chunk_redirects)
       except json.JSONDecodeError as e:
@@ -230,9 +219,7 @@ def extract_links_with_anchor_text(page_id):
     data = response.json()
     page = data["query"]["pages"][str(page_id)]
     links = page.get("links", [])
-    return {
-        link['title']: link.get('anchor_text', link['title']) for link in links
-    }
+    return {link['title']: link.get('anchor_text', link['title']) for link in links}
   except (ConnectionError, Timeout, TooManyRedirects) as e:
     print(f"Error retrieving links: {e}")
     return {}
@@ -244,8 +231,7 @@ def get_image_url_from_wikipedia(title):
     return None
   page_url = f"https://en.wikipedia.org/wiki/{quote(title)}"
   try:
-    response = requests.get(
-        page_url, headers={"User-Agent": "Shintaro Ozaki (ee207060@gmail.com)"})
+    response = requests.get(page_url, headers={"User-Agent": "Shintaro Ozaki (ee207060@gmail.com)"})
     soup = BeautifulSoup(response.content, "html.parser")
 
     # infoboxに画像がある場合は、table.infoboxを探す
@@ -338,11 +324,7 @@ def get_embedded_pages(eititle, eilimit=20):
   pages: list[dict] = []
   while True:
     try:
-      response = session.get(
-          WIKIPEDIA_API_URL, params={
-              **params,
-              **ei_continue
-          })
+      response = session.get(WIKIPEDIA_API_URL, params={**params, **ei_continue})
       data = response.json()
       for page in data.get("query", {}).get("embeddedin", []):
         title = page["title"]
@@ -374,8 +356,8 @@ def get_pageid_from_title(title):
 
 def get_infobox_page(infobox):
   articles_path = Path("data/articles")
-  template_articles_path = articles_path / infobox.replace(
-      "Template:", "").strip().replace(" ", "_")
+  template_articles_path = articles_path / infobox.replace("Template:", "").strip().replace(
+      " ", "_")
   template_articles_path.mkdir(parents=True, exist_ok=True)
   embedded_pages = get_embedded_pages(infobox, eilimit=500)
   all_pages = embedded_pages
@@ -407,8 +389,7 @@ def get_infobox_page(infobox):
           "entities": combined_entities
       }
       all_article_data.append(article_data)
-      logger.info(
-          f"Saved article data for {title} in {project_root / save_file_name}")
+      logger.info(f"Saved article data for {title} in {project_root / save_file_name}")
       time.sleep(1)
     except Exception as e:
       logger.info(f"Error processing page: {e}")

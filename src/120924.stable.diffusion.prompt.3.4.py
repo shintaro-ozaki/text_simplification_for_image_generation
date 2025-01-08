@@ -10,8 +10,7 @@ import argparse
 from dotenv import load_dotenv
 
 load_dotenv()
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 seed = 42
 
 
@@ -68,9 +67,9 @@ if __name__ == "__main__":
   for i, line in enumerate(wit_data):
     logger.info(f'Iteration {i} / {len(wit_data)}')
     if prompt_pattern == 3:
-      prompt = line["prompt3"]
+      prompt = line["prompt3"].strip()
     elif prompt_pattern == 4:
-      prompt = line["prompt4"]
+      prompt = line["prompt4"].strip()
     else:
       raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
     image = generate_image(prompt, pipeline)

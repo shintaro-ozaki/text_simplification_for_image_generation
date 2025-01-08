@@ -7,7 +7,6 @@
 #SBATCH --job-name=flux-prompt2
 #SBATCH -o logs/slurm-%x-%j.log
 
-
 project=$(pwd)
 source $project/.venv/bin/activate
 

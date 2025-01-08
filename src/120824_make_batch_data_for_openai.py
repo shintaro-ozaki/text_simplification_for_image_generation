@@ -12,12 +12,9 @@ import json
 from dotenv import load_dotenv
 from pathlib import Path
 import os
-import torch
 
-torch.manual_seed(0)
 load_dotenv()
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def load_jsonl(file_path):
@@ -31,8 +28,7 @@ def save_jsonl(data, file_path):
       f.write(json.dumps(d) + '\n')
 
 
-def make_prompt_for_summarization(caption_reference_description, entity,
-                                  abstracts):
+def make_prompt_for_summarization(caption_reference_description, entity, abstracts):
   prompt = f"""
 Please summarize the following text and make the optimal prompt for the image generation.
 Please make the prompt as simple as possible, not hitting the 100 tokens limit.
@@ -62,8 +58,8 @@ if __name__ == "__main__":
     caption_reference_description = line['caption_reference_description']
     abstracts = line['entity_abstract']
     entity_in_caption = line['entity_in_caption']
-    prompt_for_summary = make_prompt_for_summarization(
-        caption_reference_description, entity_in_caption, abstracts)
+    prompt_for_summary = make_prompt_for_summarization(caption_reference_description,
+                                                       entity_in_caption, abstracts)
     max_tokens = 300
 
     openai_data = {

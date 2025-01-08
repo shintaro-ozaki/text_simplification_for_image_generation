@@ -1,12 +1,18 @@
-# dreamlike-art/dreamlike-photoreal-2.0
-from diffusers import StableDiffusionPipeline
+# https://huggingface.co/black-forest-labs/FLUX.1-dev
+
 import torch
-from dotenv import load_dotenv
-import os
-from pathlib import Path
-import argparse
+from diffusers import FluxPipeline
+
+import torch
+from diffusers import StableDiffusion3Pipeline, BitsAndBytesConfig, SD3Transformer2DModel
+import random
 import json
+from pathlib import Path
+import os
 from loguru import logger
+from diffusers import StableDiffusion3Pipeline
+import argparse
+from dotenv import load_dotenv
 
 load_dotenv()
 project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
@@ -26,21 +32,22 @@ def load_jsonl(file_path):
 
 
 def initizalize_model(model_name):
-  model_name = "dreamlike-art/dreamlike-photoreal-2.0"
-  pipeline = StableDiffusionPipeline.from_pretrained(
-      model_name, torch_dtype=torch.float16, token=os.getenv('WRITE_TOKEN'))
+  pipeline = FluxPipeline.from_pretrained(model_name, torch_dtype=torch.bfloat16)
+  pipeline.enable_model_cpu_offload()
   pipeline = pipeline.to("cuda")
   return pipeline
 
 
 def generate_image(prompt, pipeline):
-  generator = torch.manual_seed(seed)
   image = pipeline(
-      prompt=prompt,
-      num_inference_steps=35,
-      guidance_scale=4.5,
-      generator=generator,
-      max_sequence_length=512).images[0]
+      prompt,
+      height=1024,
+      width=1024,
+      guidance_scale=3.5,
+      num_inference_steps=50,
+      max_sequence_length=512,
+      generator=torch.Generator("cpu").manual_seed(seed),
+  ).images[0]
   return image
 
 
@@ -48,7 +55,7 @@ if __name__ == "__main__":
   args = parse_args()
   prompt_pattern = args.prompt
   wit_input_file = project_root / "data" / "wit" / "en.wit.2k.prompt.jsonl"
-  model_name = "dreamlike-art/dreamlike-photoreal-2.0"
+  model_name = "black-forest-labs/FLUX.1-dev"
   model_name_suffix = model_name.split("/")[-1]
   if prompt_pattern == 1:
     image_dir = project_root / "generated_images" / "pattern1" / model_name_suffix
@@ -57,23 +64,25 @@ if __name__ == "__main__":
   image_dir.mkdir(exist_ok=True, parents=True)
   pipeline = initizalize_model(model_name)
   logger.info(f'image_dir: {image_dir}')
-
   wit_data = load_jsonl(wit_input_file)
   for i, line in enumerate(wit_data):
-    logger.info(f'Iteration {i} / {len(wit_data)}')
-    if prompt_pattern == 1:
-      prompt = line["prompt1"].strip()
-    elif prompt_pattern == 2:
-      prompt = line["prompt2"].strip()
-    else:
-      raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
-    image = generate_image(prompt, pipeline)
-    image_path = image_dir / f"{i}.png"
-    image.save(image_path)
-    logger.info(f"Image is saved at {image_path}")
-    if args.debug:
-      if i == 10:
-        break
+    try:
+      logger.info(f'Iteration {i} / {len(wit_data)}')
+      if prompt_pattern == 1:
+        prompt = line["prompt1"].strip()
+      elif prompt_pattern == 2:
+        prompt = line["prompt2"].strip()
+      else:
+        raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
+      image = generate_image(prompt, pipeline)
+      image_path = image_dir / f"{i}.png"
+      image.save(image_path)
+      logger.info(f"Image is saved at {image_path}")
+      if args.debug:
+        if i == 10:
+          break
+    except Exception as e:
+      logger.error(f"Error in iteration {i}: {e}")
 
   logger.info("All images are generated")
   logger.info(f'Generated images are saved at {image_dir}')

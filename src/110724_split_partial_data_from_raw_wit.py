@@ -9,8 +9,7 @@ from pathlib import Path
 import json
 import random
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation/')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation/')
 
 
 def load_jsonl(file_path):
@@ -34,8 +33,7 @@ def split_partial_data_from_raw_wit():
     # 英語だけを抽出
     if line["language"] == "en":
       # section_title, context_section_description がnullのものは除外
-      if line["section_title"] is None or line[
-          "context_section_description"] is None:
+      if line["section_title"] is None or line["context_section_description"] is None:
         continue
       filtered_wit.append(line)
 

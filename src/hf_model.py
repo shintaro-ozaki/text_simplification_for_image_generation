@@ -7,8 +7,7 @@ from transformers import (
 
 
 def initialize_model(model_name, quantize_type, device, hf_token, flash_attn):
-  tokenizer = AutoTokenizer.from_pretrained(
-      model_name, token=hf_token, trust_remote_code=True)
+  tokenizer = AutoTokenizer.from_pretrained(model_name, token=hf_token, trust_remote_code=True)
 
   if tokenizer.pad_token is None:
     if tokenizer.eos_token is None:

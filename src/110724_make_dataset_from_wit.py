@@ -12,8 +12,7 @@ from datasets import load_dataset
 import json
 from pathlib import Path
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def load_wit_dataset():

@@ -11,8 +11,7 @@ from loguru import logger
 
 load_dotenv()
 seed = 42
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def parse_args():
@@ -74,8 +73,7 @@ def generate_image(prompt, stage_1, stage_2, stage_3):
       negative_prompt_embeds=negative_embeds,
       generator=generator,
       output_type="pt").images
-  image = stage_3(
-      prompt=prompt, image=image, generator=generator, noise_level=100).images
+  image = stage_3(prompt=prompt, image=image, generator=generator, noise_level=100).images
   return image[0]
 
 
@@ -96,18 +94,21 @@ if __name__ == "__main__":
 
   wit_data = load_jsonl(wit_input_file)
   for i, line in enumerate(wit_data):
-    logger.info(f'Iteration {i} / {len(wit_data)}')
-    if prompt_pattern == 5:
-      prompt = line["prompt5"]
-    else:
-      raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
-    image = generate_image(prompt, stage_1, stage_2, stage_3)
-    image_path = image_dir / f"{i}.png"
-    image.save(image_path)
-    logger.info(f"Image is saved at {image_path}")
-    if args.debug:
-      if i == 10:
-        break
+    try:
+      logger.info(f'Iteration {i} / {len(wit_data)}')
+      if prompt_pattern == 5:
+        prompt = line["prompt5"].strip()
+      else:
+        raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
+      image = generate_image(prompt, stage_1, stage_2, stage_3)
+      image_path = image_dir / f"{i}.png"
+      image.save(image_path)
+      logger.info(f"Image is saved at {image_path}")
+      if args.debug:
+        if i == 10:
+          break
+    except Exception as e:
+      logger.error(f"Error: {e}")
 
   logger.info("All images are generated")
   logger.info(f'Generated images are saved at {image_dir}')

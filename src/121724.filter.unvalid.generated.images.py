@@ -12,16 +12,12 @@ def parse_args():
   return parser.parse_args()
 
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def check_images_in_directory(directory):
   supported_extensions = ('.png', '.jpg', '.jpeg')
-  files = [
-      f for f in os.listdir(directory)
-      if f.lower().endswith(supported_extensions)
-  ]
+  files = [f for f in os.listdir(directory) if f.lower().endswith(supported_extensions)]
   results = {}
 
   for i, file in enumerate(files):

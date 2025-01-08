@@ -17,8 +17,7 @@ def save_json(data, path):
     json.dump(data, f, ensure_ascii=False, indent=4)
 
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def to_cuda(elements):
@@ -58,10 +57,9 @@ def get_activations(images, batch_size):
   inception_network = to_cuda(inception_network)
   inception_network.eval()
   n_batches = int(np.ceil(num_images / batch_size))
-  inception_activations = torch.zeros(
-      (num_images, 2048),
-      dtype=torch.float32,
-      device='cuda' if torch.cuda.is_available() else 'cpu')
+  inception_activations = torch.zeros((num_images, 2048),
+                                      dtype=torch.float32,
+                                      device='cuda' if torch.cuda.is_available() else 'cpu')
 
   for batch_idx in range(n_batches):
     start_idx = batch_size * batch_idx
@@ -185,8 +183,7 @@ def load_images(path):
       print(f"Warning: Unable to load image {impath}. Skipping.")
       continue
     im = im[:, :, ::-1]  # Convert from BGR to RGB
-    im_resized = cv2.resize(
-        im, (target_shape[1], target_shape[0]))  # Resize to target shape
+    im_resized = cv2.resize(im, (target_shape[1], target_shape[0]))  # Resize to target shape
     final_images.append(im_resized)
 
   assert len(final_images) > 0, "No valid images could be processed."
@@ -233,28 +230,27 @@ if __name__ == '__main__':
         'max_tokens': 512,
     }
   elif pattern == 4:
-    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200'
-    output_eval_dir = project_root / 'evaluated-fid' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200'
+    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180'
+    output_eval_dir = project_root / 'evaluated-fid' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180'
     response = {
         'pattern': pattern,
         'diffusion_model': diffusion_model_suffix,
         'summarize_model': summarize_model_suffix,
-        'max_tokens': 200,
+        'max_tokens': 180,
     }
   elif pattern == 5:
-    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200.iterative3'
-    output_eval_dir = project_root / 'evaluated-fid' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200.iterative3'
+    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180.iterative3'
+    output_eval_dir = project_root / 'evaluated-fid' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180.iterative3'
     response = {
         'pattern': pattern,
         'diffusion_model': diffusion_model_suffix,
         'summarize_model': summarize_model_suffix,
-        'max_tokens': 200,
+        'max_tokens': 180,
         'iterative': 3,
     }
 
   model_generated_images = load_images(model_generated_dir)
-  fid_value = calculate_fid(reference_images, model_generated_images, False,
-                            batch_size)
+  fid_value = calculate_fid(reference_images, model_generated_images, False, batch_size)
   response['fid'] = fid_value
   print(fid_value)
 

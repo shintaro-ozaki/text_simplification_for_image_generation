@@ -71,7 +71,6 @@ echo "stable-diffusion-3.5-large, Qwen2.5-72B-Instruct.180.iterative3, pattern5"
 python -m clip_score wit_images_2k/ generated_images/pattern5/stable-diffusion-3.5-large/Qwen2.5-72B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"
 
-
 echo "FLUX.1-dev, LLama-3.1-70B-Instruct.180.iterative3, pattern5"
 python -m clip_score wit_images_2k/ generated_images/pattern5/FLUX.1-dev/Llama-3.1-70B-Instruct.180.iterative3 --real_flag img --fake_flag img
 echo "##############"

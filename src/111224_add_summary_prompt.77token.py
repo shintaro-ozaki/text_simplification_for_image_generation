@@ -6,12 +6,11 @@ from pathlib import Path
 import os
 import torch
 from loguru import logger
-from clip_tokenize import *
+from t5_tokenize import *
 
 torch.manual_seed(0)
 load_dotenv()
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def load_jsonl(file_path):
@@ -34,27 +33,31 @@ def parse_args():
   return parser.parse_args()
 
 
-def make_prompt_for_caption_reference_description_and_entity_summary(
-    caption_reference_description, summary):
-  prompt = f"""{summary}"""
+def make_prompt_for_caption_reference_description_and_entity_summary(caption_reference_description,
+                                                                     summary):
+  prompt = f"""
+Caption: {caption_reference_description}
+
+Note: {summary}"""
   return prompt
 
 
-def make_prompt_for_summarization(caption_reference_description, entity,
-                                  abstracts, clip_tokenizer):
-  current_words = clip_tokenized_words(clip_tokenizer,
-                                       caption_reference_description)
+def make_prompt_for_summarization(caption_reference_description, entity, abstracts, clip_tokenizer):
+  current_words, _ = t5_tokenized_words(clip_tokenizer, caption_reference_description)
   for e, a in zip(entity, abstracts):
-    current_words += clip_tokenized_words(clip_tokenizer, e)
-    current_words += clip_tokenized_words(clip_tokenizer, a)
+    e_words, _ = t5_tokenized_words(clip_tokenizer, e)
+    a_words, _ = t5_tokenized_words(clip_tokenizer, a)
+  current_words += e_words + a_words
 
   prompt = f"""
 The current tokens are {current_words} tokens.
-Please generate a summary so that there are 77 tokens.
+Please generate a summary so that there are 180 tokens.
 However, please do not delete proper nouns or other important information.
 Please begin the output with SummaryStart: and write the summary of the text.
+Please end the output with <SummaryEnd> as the last token.
 
-Caption: {caption_reference_description}
+Example:
+SummaryStart: The summary of the text is as follows. The text is about the summary of the text. <SummaryEnd>
 
 Complement:
 """
@@ -88,16 +91,15 @@ if __name__ == "__main__":
   device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   logger.info(f'Device: {device}')
   hf_token = os.getenv('HUGGINGFACE_TOKEN')
-  clip_tokenizer_name = "openai/clip-vit-large-patch14"
-  clip_tokenizer = initialize_clip_tokenizer(clip_tokenizer_name)
+  t5_tokenizer_name = "google-t5/t5-11b"
+  t5_tokenizer = initialize_t5_tokenizer(t5_tokenizer_name)
   kwargs = {
       "max_new_tokens": max_new_tokens,
       "do_sample": False,
   }
   model_suffix = model_name.split('/')[-1]
   flash_attn = False
-  model, tokenizer = initialize_model(model_name, quantize_type, device,
-                                      hf_token, flash_attn)
+  model, tokenizer = initialize_model(model_name, quantize_type, device, hf_token, flash_attn)
   wit_path = project_root / 'data' / 'wit' / 'en.wit.2k.prompt.jsonl'
   output_path = project_root / 'data' / 'wit' / f'en.wit.2k.prompt.summary.{model_suffix}.{max_new_tokens}.jsonl'
   logger.info(f'Output path: {output_path}')
@@ -112,14 +114,15 @@ if __name__ == "__main__":
         caption_reference_description = line['caption_reference_description']
         abstracts = line['entity_abstract']
         entity_in_caption = line['entity_in_caption']
-        prompt_for_summary = make_prompt_for_summarization(
-            caption_reference_description, entity_in_caption, abstracts,
-            clip_tokenizer)
+        prompt_for_summary = make_prompt_for_summarization(caption_reference_description,
+                                                           entity_in_caption, abstracts,
+                                                           t5_tokenizer)
         prompts.append(prompt_for_summary)
       summaries = summarize(model, tokenizer, prompts, kwargs)
       for line, summary in zip(batch, summaries):
-        summary = summary.split('SummaryStart:')[2].strip()
-        logger.info(f'Filtered: {summary=}')
+        summary = summary.split('SummaryStart:')[3]
+        summary = summary.split('<SummaryEnd>')[0].strip()
+        logger.info(f'Filtered: {summary}')
         prompt4 = make_prompt_for_caption_reference_description_and_entity_summary(
             line['caption_reference_description'], summary)
         line['summary4'] = summary

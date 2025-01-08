@@ -3,16 +3,12 @@ from PIL import Image
 from pathlib import Path
 
 # /cl/home2/shintaro/text_simplification_for_image_generation/wit_images_2k
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def check_images_in_directory(directory):
   supported_extensions = ('.png', '.jpg', '.jpeg')
-  files = [
-      f for f in os.listdir(directory)
-      if f.lower().endswith(supported_extensions)
-  ]
+  files = [f for f in os.listdir(directory) if f.lower().endswith(supported_extensions)]
   results = {}
 
   for i, file in enumerate(files):

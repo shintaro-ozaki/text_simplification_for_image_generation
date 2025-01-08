@@ -9,9 +9,8 @@ end=2653
 
 # 存在しない番号を確認
 for i in $(seq $start $end); do
-    # ファイルの存在確認
-    if ! [ -e "$dir/$i.png" ] && ! [ -e "$dir/$i.jpg" ] && ! [ -e "$dir/$i.jpeg" ]; then
-        echo "$i"
-    fi
+  # ファイルの存在確認
+  if ! [ -e "$dir/$i.png" ] && ! [ -e "$dir/$i.jpg" ] && ! [ -e "$dir/$i.jpeg" ]; then
+    echo "$i"
+  fi
 done
-

@@ -15,5 +15,4 @@ time python $project/src/120924.deep.floyd.prompt.3.4.py \
   --summarize_model meta-llama/Llama-3.1-8B-Instruct \
   --max_token 180
 
-
 echo "Done"

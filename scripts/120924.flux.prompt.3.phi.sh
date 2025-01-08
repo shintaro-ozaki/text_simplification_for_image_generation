@@ -7,8 +7,6 @@
 #SBATCH --job-name=sd3.5-prompt1
 #SBATCH -o logs/slurm-%x-%j.log
 
-
-
 project=$(pwd)
 source $project/.venv/bin/activate
 

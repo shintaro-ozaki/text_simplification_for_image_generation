@@ -18,9 +18,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern4
 summarize_model_name=Llama-3.3-70B-Instruct.200
@@ -28,9 +28,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern5
 summarize_model_name=Llama-3.3-70B-Instruct.200.iterative3
@@ -38,9 +38,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 model_name=stable-diffusion-3.5-large
 pattern=pattern3
@@ -49,9 +49,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern4
 summarize_model_name=Llama-3.3-70B-Instruct.200
@@ -59,9 +59,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern5
 summarize_model_name=Llama-3.3-70B-Instruct.200.iterative3
@@ -69,9 +69,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 model_name=dreamlike-photoreal-2.0
 pattern=pattern3
@@ -80,9 +80,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern4
 summarize_model_name=Llama-3.3-70B-Instruct.200
@@ -90,9 +90,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern5
 summarize_model_name=Llama-3.3-70B-Instruct.200.iterative3
@@ -100,9 +100,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 model_name=FLUX.1-dev
 pattern=pattern3
@@ -111,9 +111,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern4
 summarize_model_name=Llama-3.3-70B-Instruct.200
@@ -121,9 +121,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 pattern=pattern5
 summarize_model_name=Llama-3.3-70B-Instruct.200.iterative3
@@ -131,10 +131,9 @@ reference_dir=$project/wit_images_2k/
 generated_dir=$project/generated_images/$pattern/$model_name/$summarize_model_name/
 
 python $project/src/121924.evaluate.lpips.py \
-    -d0 $reference_dir \
-    -d1 $generated_dir \
-    -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
-
+  -d0 $reference_dir \
+  -d1 $generated_dir \
+  -o $project/evaluated-lpips/$pattern/$model_name/$summarize_model_name/lpips.json
 
 # is
 diffusion_models=(

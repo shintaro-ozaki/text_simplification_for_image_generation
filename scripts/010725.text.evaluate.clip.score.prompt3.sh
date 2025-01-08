@@ -83,7 +83,6 @@ echo "stable-diffusion-3.5-large, Qwen2.5-72B-Instruct.512, pattern3"
 python -m clip_score generated_images/pattern3/stable-diffusion-3.5-large/Qwen2.5-72B-Instruct.512 data/reference_caption/
 echo "##############"
 
-
 echo "FLUX.1-dev, LLama-3.1-70B-Instruct.512, pattern3"
 python -m clip_score generated_images/pattern3/FLUX.1-dev/Llama-3.1-70B-Instruct.512 data/reference_caption/
 echo "##############"

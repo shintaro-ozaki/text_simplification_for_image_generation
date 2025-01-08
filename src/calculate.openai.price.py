@@ -5,8 +5,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"),)
 
@@ -44,8 +43,7 @@ if __name__ == "__main__":
   wit_file = project_root / 'data/wit/batch.format.wit2k.jsonl'
   print(f'Loading data....')
   data = load_jsonl(wit_file)
-  data.sort(
-      key=lambda x: len(x['body']['messages'][1]['content']), reverse=True)
+  data.sort(key=lambda x: len(x['body']['messages'][1]['content']), reverse=True)
   print(f'Loaded {len(data)} data')
 
   # avgのlengthを計算
@@ -58,8 +56,7 @@ if __name__ == "__main__":
   fee = 0
   for i, d in enumerate(data):
     if i < 10:
-      response = execute(d['body']['messages'][0]['content'],
-                         d['body']['messages'][1]['content'])
+      response = execute(d['body']['messages'][0]['content'], d['body']['messages'][1]['content'])
       completion_tokens = response.usage.completion_tokens
       prompt_tokens = response.usage.prompt_tokens
       fee = (0.00015 * prompt_tokens / 1000 + 0.0006 * completion_tokens / 1000)

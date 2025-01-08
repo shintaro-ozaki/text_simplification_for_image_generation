@@ -33,11 +33,10 @@ diffusion_models=(
   black-forest-labs/FLUX.1-dev
 )
 
-
 for diffusion_model in ${diffusion_models[@]}; do
-    echo "diffusion_model: $diffusion_model, summarize_model: $summarize_model, pattern: 3"
-    python $project/src/121624.evaluate.inception.score.py \
-      --pattern 3 \
-      --diffusion_model $diffusion_model \
-      --summarize_model openai
+  echo "diffusion_model: $diffusion_model, summarize_model: $summarize_model, pattern: 3"
+  python $project/src/121624.evaluate.inception.score.py \
+    --pattern 3 \
+    --diffusion_model $diffusion_model \
+    --summarize_model openai
 done

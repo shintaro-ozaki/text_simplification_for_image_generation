@@ -78,7 +78,6 @@ sbatch scripts/120924.flux.prompt.5.llama8b.sh
 sbatch scripts/120924.flux.prompt.5.llama70b.sh
 sbatch scripts/120924.flux.prompt.5.3.3.llama70b.sh
 
-
 # sbatch scripts/121224.flux.prompt.3.openai.sh
 # sbatch scripts/121224.dreamlike.prompt.3.openai.sh
 # sbatch scripts/121224.stable.diffusion.prompt.3.openai.sh

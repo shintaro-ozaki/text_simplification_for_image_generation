@@ -11,8 +11,7 @@ import argparse
 from pathlib import Path
 from tqdm import tqdm
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 MODEL_DIR = '/tmp/imagenet'
 DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
@@ -32,9 +31,7 @@ def download_inception_model():
     import urllib.request
 
     def _progress(count, block_size, total_size):
-      print(
-          f"\r>> Downloading {filename} {count * block_size / total_size * 100:.1f}%",
-          end="")
+      print(f"\r>> Downloading {filename} {count * block_size / total_size * 100:.1f}%", end="")
 
     filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath, _progress)
     print(f"\nSuccessfully downloaded {filename}")
@@ -52,8 +49,7 @@ def preprocess_image(image):
   transform = transforms.Compose([
       transforms.Resize((299, 299)),
       transforms.ToTensor(),
-      transforms.Normalize(
-          mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+      transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
   ])
   return transform(image).unsqueeze(0)
 
@@ -63,8 +59,7 @@ def get_inception_score(images, model, splits=10):
   assert all(isinstance(img, np.ndarray) for img in images)
   assert all(len(img.shape) == 3 for img in images)
 
-  inps = torch.cat([preprocess_image(Image.fromarray(img)) for img in images],
-                   dim=0)
+  inps = torch.cat([preprocess_image(Image.fromarray(img)) for img in images], dim=0)
   bs = 100  # Batch size
   preds = []
 
@@ -77,10 +72,8 @@ def get_inception_score(images, model, splits=10):
   scores = []
 
   for i in tqdm(range(splits)):
-    part = preds[(i * preds.shape[0] // splits):((i + 1) * preds.shape[0] //
-                                                 splits), :]
-    kl = part * (
-        np.log(part) - np.log(np.expand_dims(np.mean(part, axis=0), 0)))
+    part = preds[(i * preds.shape[0] // splits):((i + 1) * preds.shape[0] // splits), :]
+    kl = part * (np.log(part) - np.log(np.expand_dims(np.mean(part, axis=0), 0)))
     kl = np.mean(np.sum(kl, axis=1))
     scores.append(np.exp(kl))
 
@@ -89,9 +82,7 @@ def get_inception_score(images, model, splits=10):
 
 def load_images_from_directory(directory):
   filenames = glob.glob(os.path.join(directory, '*.*'))
-  images = [
-      np.array(Image.open(filename).convert('RGB')) for filename in filenames
-  ]
+  images = [np.array(Image.open(filename).convert('RGB')) for filename in filenames]
   return images
 
 
@@ -128,22 +119,22 @@ if __name__ == '__main__':
         'max_tokens': 512,
     }
   elif pattern == 4:
-    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200'
-    output_eval_dir = project_root / 'evaluated-IS' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200'
+    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180'
+    output_eval_dir = project_root / 'evaluated-IS' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180'
     response = {
         'pattern': pattern,
         'diffusion_model': diffusion_model_suffix,
         'summarize_model': summarize_model_suffix,
-        'max_tokens': 200,
+        'max_tokens': 180,
     }
   elif pattern == 5:
-    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200.iterative3'
-    output_eval_dir = project_root / 'evaluated-IS' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.200.iterative3'
+    model_generated_dir = project_root / 'generated_images' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180.iterative3'
+    output_eval_dir = project_root / 'evaluated-IS' / f'pattern{pattern}' / f'{diffusion_model_suffix}' / f'{summarize_model_suffix}.180.iterative3'
     response = {
         'pattern': pattern,
         'diffusion_model': diffusion_model_suffix,
         'summarize_model': summarize_model_suffix,
-        'max_tokens': 200,
+        'max_tokens': 180,
         'iterative': 3,
     }
   output_eval_dir.mkdir(parents=True, exist_ok=True)

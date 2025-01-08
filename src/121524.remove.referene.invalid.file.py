@@ -16,8 +16,7 @@ logging.basicConfig(
 )
 logger: logging.Logger = logging.getLogger(__name__)
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def load_jsonl(file_path):

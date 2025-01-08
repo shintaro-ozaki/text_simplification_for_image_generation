@@ -3,8 +3,7 @@ import json
 from pathlib import Path
 from urllib.parse import quote
 
-project_root = Path(
-    '/cl/home2/shintaro/text_simplification_for_image_generation')
+project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 
 
 def load_jsonl(file_path):
@@ -27,8 +26,7 @@ logging.basicConfig(
 logger: logging.Logger = logging.getLogger(__name__)
 
 
-def make_prompt_for_only_caption_reference_description(
-    caption_reference_description):
+def make_prompt_for_only_caption_reference_description(caption_reference_description):
   prompt = f"""
 Please generate an image using the following information.
 
@@ -37,8 +35,8 @@ Caption: {caption_reference_description}
   return prompt
 
 
-def make_prompt_for_caption_reference_description_and_entity(
-    caption_reference_description, entity, abstract):
+def make_prompt_for_caption_reference_description_and_entity(caption_reference_description, entity,
+                                                             abstract):
   prompt = f"""
 Please generate an image using the following information.
 
@@ -99,8 +97,7 @@ def make_all_variation_model_input(wit_data, output_path):
       combined_entities = list(set(entities + wiki_text_entities))
 
       entity_in_caption: list[str] = [
-          entity for entity in combined_entities
-          if entity in caption_reference_description
+          entity for entity in combined_entities if entity in caption_reference_description
       ]
       abstracts: list[str] = get_abstract_of_entities(entity_in_caption)
 
@@ -111,8 +108,7 @@ def make_all_variation_model_input(wit_data, output_path):
       line['entity_abstract'] = abstracts
       line['entity_in_caption'] = entity_in_caption
 
-      prompt1 = make_prompt_for_only_caption_reference_description(
-          caption_reference_description)
+      prompt1 = make_prompt_for_only_caption_reference_description(caption_reference_description)
       prompt2 = make_prompt_for_caption_reference_description_and_entity(
           caption_reference_description, entity_in_caption, abstracts)
       line['prompt1'] = prompt1

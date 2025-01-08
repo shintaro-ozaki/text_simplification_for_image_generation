@@ -6,7 +6,6 @@
 #SBATCH --job-name=text-evaluate-clip-score-2
 #SBATCH -o logs/slurm-%x-%j.log
 
-
 ##########################################
 # https://github.com/Taited/clip-score
 ##########################################
