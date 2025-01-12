@@ -4,7 +4,7 @@
 #SBATCH -t 100:00:00
 #SBATCH --gres=gpu:a100:1
 #SBATCH --account=lang
-#SBATCH --job-name=sd3.5-prompt5
+#SBATCH --job-name=sd3.5.llama8b.prompt.5
 #SBATCH -o logs/slurm-%x-%j.log
 project=$(pwd)
 source $project/.venv/bin/activate

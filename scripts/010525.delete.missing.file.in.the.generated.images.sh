@@ -29,7 +29,7 @@ while read -r number; do
   # 該当する .png ファイルを検索して削除
   find "$search_dir" -type f -name "$number.png" -exec rm -v {} \;
 
-  # ref_dirも削除
+  #   # ref_dirも削除
   find "$ref_dir" -type f -name "$number.png" -exec rm -v {} \;
   find "$ref_dir" -type f -name "$number.jpeg" -exec rm -v {} \;
   find "$ref_dir" -type f -name "$number.jpg" -exec rm -v {} \;

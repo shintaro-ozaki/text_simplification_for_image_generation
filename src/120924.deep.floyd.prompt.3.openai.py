@@ -93,20 +93,23 @@ if __name__ == "__main__":
   wit_data = load_jsonl(wit_input_file)
   for i, line in enumerate(wit_data):
     logger.info(f'Iteration {i} / {len(wit_data)}')
-    if prompt_pattern == 3:
-      content = line["response"]["body"]["choices"][0]["message"]["content"].split('\n\n')[0]
-      prompt = content.replace('SummaryStart:', '')
-      prompt = prompt.split('<SummaryEnd>')[0]
-      prompt = prompt.strip()
-    else:
-      raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
-    image = generate_image(prompt, stage_1, stage_2, stage_3)
-    image_path = image_dir / f"{i}.png"
-    image.save(image_path)
-    logger.info(f"Image is saved at {image_path}")
-    if args.debug:
-      if i == 10:
-        break
+    try:
+      if prompt_pattern == 3:
+        content = line["response"]["body"]["choices"][0]["message"]["content"].split('\n\n')[0]
+        prompt = content.replace('SummaryStart:', '')
+        prompt = prompt.split('<SummaryEnd>')[0]
+        prompt = prompt.strip()
+      else:
+        raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
+      image = generate_image(prompt, stage_1, stage_2, stage_3)
+      image_path = image_dir / f"{i}.png"
+      image.save(image_path)
+      logger.info(f"Image is saved at {image_path}")
+      if args.debug:
+        if i == 10:
+          break
+    except Exception as e:
+      logger.error(f"Error: {e}")
 
   logger.info("All images are generated")
   logger.info(f'Generated images are saved at {image_dir}')

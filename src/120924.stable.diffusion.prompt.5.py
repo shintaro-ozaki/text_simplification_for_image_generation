@@ -66,18 +66,22 @@ if __name__ == "__main__":
 
   wit_data = load_jsonl(wit_input_file)
   for i, line in enumerate(wit_data):
-    logger.info(f'Iteration {i} / {len(wit_data)}')
-    if prompt_pattern == 5:
-      prompt = line["prompt5"].strip()
-    else:
-      raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
-    image = generate_image(prompt, pipeline)
-    image_path = image_dir / f"{i}.png"
-    image.save(image_path)
-    logger.info(f"Image is saved at {image_path}")
-    if args.debug:
-      if i == 10:
-        break
+    try:
+      logger.info(f'Iteration {i} / {len(wit_data)}')
+      if prompt_pattern == 5:
+        prompt = line["prompt5"].strip()
+      else:
+        raise ValueError(f"Invalid prompt pattern: {prompt_pattern}")
+      image = generate_image(prompt, pipeline)
+      image_path = image_dir / f"{i}.png"
+      image.save(image_path)
+      logger.info(f"Image is saved at {image_path}")
+      if args.debug:
+        if i == 10:
+          break
+    except Exception as e:
+      logger.error(f"Error: {e}")
+      continue
 
   logger.info("All images are generated")
   logger.info(f'Generated images are saved at {image_dir}')

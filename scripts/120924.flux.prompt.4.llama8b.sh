@@ -4,7 +4,7 @@
 #SBATCH -t 100:00:00
 #SBATCH --gres=gpu:a100:1
 #SBATCH --account=is-nlp
-#SBATCH --job-name=flux-4-llama3-a100
+#SBATCH --job-name=flux-4.llama3.a100
 #SBATCH -o logs/slurm-%x-%j.log
 
 project=$(pwd)

@@ -2,9 +2,9 @@
 #SBATCH -p gpu_long
 #SBATCH -c 4
 #SBATCH -t 100:00:00
-#SBATCH --gres=gpu:6000:1
+#SBATCH --gres=gpu:a100:1
 #SBATCH --account=is-nlp
-#SBATCH --job-name=sd3.5-prompt1
+#SBATCH --job-name=flux.5.llama8b
 #SBATCH -o logs/slurm-%x-%j.log
 
 project=$(pwd)
