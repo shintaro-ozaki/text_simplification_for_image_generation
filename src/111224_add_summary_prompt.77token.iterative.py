@@ -9,6 +9,7 @@ from loguru import logger
 from t5_tokenize import *
 
 torch.manual_seed(0)
+from dotenv import load_dotenv
 load_dotenv()
 project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
 

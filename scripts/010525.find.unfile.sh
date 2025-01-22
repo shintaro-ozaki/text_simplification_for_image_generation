@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # チェック対象のディレクトリ
-dir=generated_images/pattern3/dreamlike-photoreal-2.0/Phi-3.5-mini-instruct.512
+dir=generated_images/pattern3/IF-I-L-v1.0/Llama-3.1-8B-Instruct.512
 
 # ファイル番号の範囲
 start=1

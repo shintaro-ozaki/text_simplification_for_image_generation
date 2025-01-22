@@ -8,5 +8,5 @@
 sbatch scripts/121724.evaluate.fid.prompt1.sh
 sbatch scripts/121724.evaluate.fid.prompt2.sh
 sbatch scripts/121724.evaluate.fid.prompt3.sh
-sbatch scripts/121724.evaluate.fid.prompt4.sh
-sbatch scripts/121724.evaluate.fid.prompt5.sh
+# sbatch scripts/121724.evaluate.fid.prompt4.sh
+# sbatch scripts/121724.evaluate.fid.prompt5.sh

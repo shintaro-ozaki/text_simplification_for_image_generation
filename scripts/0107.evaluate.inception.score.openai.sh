@@ -38,5 +38,5 @@ for diffusion_model in ${diffusion_models[@]}; do
   python $project/src/121624.evaluate.inception.score.py \
     --pattern 3 \
     --diffusion_model $diffusion_model \
-    --summarize_model openai
+    --summarize_model Llama-3.3-70B-Instruct
 done

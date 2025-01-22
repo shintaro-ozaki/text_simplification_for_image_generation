@@ -12,8 +12,7 @@ def initialize_clip_tokenizer(tokenizer_name):
 def tokenize_by_clip_tokenizer(tokenizer, text):
   tokens = tokenizer(
       text,
-      max_length=77,
-      truncation=True,
+      truncation=False,
       return_tensors="pt",
   )
   return tokens

@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -p lang_long
-#SBATCH -c 16
+#SBATCH -c 4
 #SBATCH -t 100:00:00
 #SBATCH --account=lang
 #SBATCH --job-name=delete-missing-file
@@ -12,6 +12,7 @@ txt_file="scripts/missing_file.txt"
 # 検索対象のディレクトリ
 search_dir="generated_images"
 ref_dir=wit_images_2k
+caption_ref_dir=data/reference_caption
 
 # ファイルが存在するか確認
 if [ ! -f "$txt_file" ]; then
@@ -33,5 +34,8 @@ while read -r number; do
   find "$ref_dir" -type f -name "$number.png" -exec rm -v {} \;
   find "$ref_dir" -type f -name "$number.jpeg" -exec rm -v {} \;
   find "$ref_dir" -type f -name "$number.jpg" -exec rm -v {} \;
+
+  # reference_captionも削除
+  find "$caption_ref_dir" -type f -name "$number.txt" -exec rm -v {} \;
 
 done <"$txt_file"

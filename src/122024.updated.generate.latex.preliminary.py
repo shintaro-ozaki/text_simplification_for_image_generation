@@ -18,9 +18,6 @@ def find_best_scores(scores, higher_is_better):
 
 
 def compare_scores(base_scores, new_scores, metric, higher_is_better, flag):
-  if flag:
-    if new_scores <= base_scores:
-      new_scores = new_scores + 0.9
   if higher_is_better:
     if new_scores > base_scores:
       return f"\\redbox{{{new_scores:.2f}}}"
@@ -37,7 +34,6 @@ def compare_scores(base_scores, new_scores, metric, higher_is_better, flag):
 if __name__ == "__main__":
   project_root = Path('/cl/home2/shintaro/text_simplification_for_image_generation')
   summarization_models = [
-      'Phi-3.5-mini-instruct',
       'Llama-3.1-8B-Instruct',
       'Llama-3.1-70B-Instruct',
       'Llama-3.3-70B-Instruct',
@@ -45,9 +41,9 @@ if __name__ == "__main__":
       'openai',
   ]
   diffusion_models = [
-      'dreamlike-photoreal-2.0', 'IF-I-L-v1.0', 'FLUX.1-dev', 'stable-diffusion-3.5-large'
+      'dreamlike-photoreal-2.0', 'IF-I-L-v1.0', 'stable-diffusion-3.5-large'
   ]#clip,　t5, その両方, その両方
-  patterns = [1, 2, 3, 4, 5]
+  patterns = [1, 4, 5]
   metrics = ['inception_score', 'fid', 'clipscore']
   clip_score = load_json(project_root / 'data' / 'clipscore.json')
   txt_clip_score = load_json(project_root / 'data' / 'text.clipscore.json')
@@ -102,29 +98,29 @@ if __name__ == "__main__":
         for diffusion_model in diffusion_models:
           try:
             if pattern == 3:
-              is_result = load_json(project_root / 'evaluated-IS' / f'pattern{pattern}' /
+              is_result = load_json(project_root / '1-evaluated-IS' / f'pattern{pattern}' /
                                     diffusion_model / f'{summarization_model}.512' /
                                     f'inception_score.json')
             elif pattern == 4:
-              is_result = load_json(project_root / 'evaluated-IS' / f'pattern{pattern}' /
-                                    diffusion_model / f'{summarization_model}.180' /
+              is_result = load_json(project_root / '1-evaluated-IS' / f'pattern{pattern}' /
+                                    diffusion_model / f'{summarization_model}.200' /
                                     f'inception_score.json')
             elif pattern == 5:
-              is_result = load_json(project_root / 'evaluated-IS' / f'pattern{pattern}' /
-                                    diffusion_model / f'{summarization_model}.180.iterative3' /
+              is_result = load_json(project_root / '1-evaluated-IS' / f'pattern{pattern}' /
+                                    diffusion_model / f'{summarization_model}.200.iterative3' /
                                     f'inception_score.json')
           except Exception as e:
             is_result = {'mean_score': 0}
           try:
             if pattern == 3:
-              fid_result = load_json(project_root / 'evaluated-fid' / f'pattern{pattern}' /
+              fid_result = load_json(project_root / '1-evaluated-fid' / f'pattern{pattern}' /
                                      diffusion_model / f'{summarization_model}.512' / 'fid.json')
             elif pattern == 4:
-              fid_result = load_json(project_root / 'evaluated-fid' / f'pattern{pattern}' /
-                                     diffusion_model / f'{summarization_model}.180' / 'fid.json')
+              fid_result = load_json(project_root / '1-evaluated-fid' / f'pattern{pattern}' /
+                                     diffusion_model / f'{summarization_model}.200' / 'fid.json')
             elif pattern == 5:
-              fid_result = load_json(project_root / 'evaluated-fid' / f'pattern{pattern}' /
-                                     diffusion_model / f'{summarization_model}.180.iterative3' /
+              fid_result = load_json(project_root / '1-evaluated-fid' / f'pattern{pattern}' /
+                                     diffusion_model / f'{summarization_model}.200.iterative3' /
                                      'fid.json')
           except:
             fid_result = {'fid': 0}
@@ -163,8 +159,8 @@ if __name__ == "__main__":
             encoder_model = "T5"
           elif diffusion_model == "IF-I-L-v1.0":
             encoder_model = "CLIP"
-          elif diffusion_model == "FLUX.1-dev":
-            encoder_model = "\\multirow{2}{*}{Both}"
+          elif diffusion_model == "stable-diffusion-3.5-large":
+            encoder_model = "Both"
           print(
               f'{pattern} & {summarization_model_cell} & {diffusion_model} & {encoder_model} & {is_comparison} & {fid_comparison} & {clip_txt_comparison}  & {clip_img_comparison} \\\\'
           )

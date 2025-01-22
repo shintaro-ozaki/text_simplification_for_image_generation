@@ -17,7 +17,7 @@ def main():
   output_ref_dir.mkdir(exist_ok=True, parents=True)
 
   for i, data in enumerate(wit_data):
-    print(f'Processing {i} / {len(wit_data)}')
+    print(f'Processing {i+1} / {len(wit_data)}')
     ref = data['caption_reference_description']
     with open(output_ref_dir / f'{i}.txt', 'w') as file:
       file.write(ref)
